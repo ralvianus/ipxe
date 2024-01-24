@@ -1,6 +1,7 @@
 #!/bin/bash
 ## prerequisites ##
 # yum install -y xz-devel make gcc makeisofs syslinux
+# apt install -y liblzma-dev binutils mtools make gcc mkisofs syslinux
 # detect and resolve symlink
 if [[ $(readlink -f $0) =~ ^(.*)/([^/]+)$ ]]; then
 	WORKDIR="${BASH_REMATCH[1]}"
@@ -32,6 +33,7 @@ function ccyan {
 if [[ ! -d ${IPXEDIR} ]]; then
 	printf "$(ccyan "IPXE not found, downloading now...")\n" 1>&2
 	git clone https://github.com/ipxe/ipxe
+	git checkout 6ca597e
 	make -C ${IPXEDIR}
 fi
 
